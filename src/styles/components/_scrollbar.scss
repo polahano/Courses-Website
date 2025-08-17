@@ -1,0 +1,40 @@
+@use "../abstracts" as *;
+
+.scroll-x {
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  /* Remove arrow buttons in WebKit/Chromium */
+  &::-webkit-scrollbar-button,
+  &::-webkit-scrollbar-button:single-button,
+  &::-webkit-scrollbar-button:horizontal:decrement,
+  &::-webkit-scrollbar-button:horizontal:increment,
+  &::-webkit-scrollbar-button:horizontal:start:decrement,
+  &::-webkit-scrollbar-button:horizontal:end:increment {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+  }
+
+  /* Optional: spacing so the bar doesn't touch content */
+  scrollbar-gutter: stable both-edges;
+  padding-bottom: 30px;
+
+  /* rest of your styling … */
+  &::-webkit-scrollbar {
+    height: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: $gray-secondary;
+    background-clip: content-box;
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    overflow: hidden;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $blue-primary;
+    min-width: 40px;
+  }
+}

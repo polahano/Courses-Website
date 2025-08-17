@@ -1,0 +1,21 @@
+<div class="navbar-container">
+  <div class="nav-content d-flex justify-content-between">
+    <img src="/images/logo 1.png" alt="Linkdev Logo" class="nav-logo" />
+    <div class="nav-menu">
+      <img
+        src="/icons/menu.svg"
+        alt="Nav menu"
+        class="nav-menu-icon"
+        (click)="toggleMenu()"
+      />
+      <div
+        class="nav-menu-items"
+        [style.display]="isMenuOpen ? 'flex' : 'none'"
+      >
+        <i src="icons/cart.svg" class="text-bg-danger"></i>
+        <button class="login">Log In</button>
+        <button class="signup">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>

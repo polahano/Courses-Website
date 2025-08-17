@@ -1,0 +1,52 @@
+<section>
+  <div class="hero-header">
+    <div class="hero-text">
+      <h1 class="title">
+        Better <span class="light-blue-text">Insights</span> For Business
+        <span class="light-blue-text">Growth</span>
+      </h1>
+      <p class="desc">
+        Learn UI-UX Design skills with weekend UX . The latest online learning
+        system and material that help your knowledge growing.
+      </p>
+      <button type="button" class="get-started-button" title="Get Started">
+        Get Started
+      </button>
+    </div>
+    <img
+      src="images/Group 2216.svg"
+      alt="girl home"
+      class="hero-image mobile-content"
+    />
+  </div>
+</section>
+<section>
+  <div class="gallery">
+    <p class="title">
+      <span class="light-blue-text">Check</span> our latest Media Gallery
+    </p>
+    <p class="desc"></p>
+    <div class="carousel scroll-x">
+      @for(img of sliderImages; track img.id){
+      <img
+        [src]="img.image"
+        alt="gallery image {{ img.id }}"
+        class="gallery-image"
+      />
+      }
+    </div>
+    <button type="button" class="view-photos-button" title="View All Photos">
+      View All Photos
+    </button>
+  </div>
+</section>
+<section>
+  <div class="top-courses">
+    <h2>Top Courses</h2>
+    <div class="courses-cards">
+      @for(course of coursesList.slice(0,3);track course.id){
+      <app-course-card [course]="course"></app-course-card>
+      }
+    </div>
+  </div>
+</section>

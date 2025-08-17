@@ -1,0 +1,71 @@
+@use "../abstracts" as *;
+
+.hero-header {
+  .hero-text {
+    padding: 32px;
+    @include flex(column, 20px);
+    .title {
+      @include font($font-dmsans, 2.5rem, "", 700);
+    }
+
+    .desc {
+      @include font($font-poppins, "", $gray-primary, 400);
+    }
+    gap: 19px;
+    .get-started-button {
+      @include button($blue-primary, 28px, 8px, 8px);
+      @include font($font-inter, 0.857rem, white, 600);
+    }
+  }
+  img {
+    padding: 0;
+    width: 100%;
+  }
+}
+
+.gallery {
+  background-color: $bg-light-blue;
+  padding-block: 40.25px;
+  .title {
+    @include font($font-poppins, 1.875rem, $text-dark-blue, 600);
+    padding-inline: 20px;
+  }
+  .desc {
+    @include font($font-poppins, 1rem, $gray-primary2, 400);
+    margin-bottom: 10px;
+    padding-inline: 20px;
+  }
+  .carousel {
+    @include flex(row, 20px);
+    padding-right: 0 !important ;
+
+    .gallery-image {
+      height: 290px;
+      aspect-ratio: 1/1;
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      -ms-border-radius: 20px;
+      -o-border-radius: 20px;
+      border-radius: 20px;
+    }
+  }
+  .view-photos-button {
+    @include button($blue-primary, 20px, 10px, 8px);
+    @include font($font-inter, 0.857rem, white, 600);
+    margin-top: 50px;
+    margin-inline: auto;
+  }
+}
+
+.top-courses {
+  padding-block: 30px;
+  h2 {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  padding-inline: 30px;
+  .courses-cards {
+    @include flex(row, 20px);
+    flex-wrap: wrap;
+  }
+}

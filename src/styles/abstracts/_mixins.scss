@@ -1,0 +1,41 @@
+@mixin font($family: sans-serif, $size: 1rem, $color: black, $weight: 0) {
+  font-family: $family;
+  font-size: $size;
+  color: $color;
+  font-weight: $weight;
+}
+
+@mixin flex($dir: row, $gap: 0) {
+  display: flex;
+  flex-direction: $dir;
+  gap: $gap;
+}
+
+@mixin button($bg-color: $blue-primary, $padding-x, $padding-y, $radius) {
+  display: block;
+  width: fit-content;
+  background-color: $bg-color;
+  padding-inline: $padding-x;
+  padding-block: $padding-y;
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+}
+
+@mixin screen-sm {
+  @media (max-width: 599px) {
+    @content;
+  }
+}
+@mixin screen-md {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+@mixin screen-lg {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}

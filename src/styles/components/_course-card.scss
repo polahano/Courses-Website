@@ -1,0 +1,78 @@
+@use "../abstracts" as *;
+
+.course-card {
+  .card-content {
+    border: #e2e8f0 2px solid;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.105),
+      0 3px 10px 0 rgba(0, 0, 0, 0.062);
+
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    -ms-border-radius: 16px;
+    -o-border-radius: 16px;
+    border-radius: 16px;
+    padding: 16px;
+    @include flex(column, 10px);
+    .image {
+      position: relative;
+      img.course-image {
+        width: 100%;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        -ms-border-radius: 8px;
+        -o-border-radius: 8px;
+        border-radius: 8px;
+      }
+      p.discount {
+        @include font($font-inter, 0.75rem, white, 700);
+        background-color: $pink-primary;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        padding: 5px 10px;
+      }
+      img.cart {
+        position: absolute;
+        left: 10px;
+        bottom: 10px;
+        height: 30px;
+        cursor: pointer;
+      }
+    }
+    p.price {
+      @include font($font-inter, 0.875rem, $blue-primary, 600);
+    }
+    p.category {
+      @include font($font-inter, 0.75rem, white, 600);
+      background-color: $blue-primary;
+      padding-inline: 4px;
+      padding-block: 2px;
+
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      -ms-border-radius: 8px;
+      -o-border-radius: 8px;
+      border-radius: 8px;
+    }
+    .details {
+      @include flex(column, 10px);
+      .course-name {
+        cursor: pointer;
+        @include font($font-inter, 1.125rem, #0f172a, 600);
+      }
+      .instructor {
+        @include font($font-inter, 0.875rem, #334155, 400);
+      }
+      .rating {
+        @include font($font-inter, 0.75rem, #334155, 600);
+        .fa-star {
+          color: $gold;
+          font-size: 1rem;
+        }
+      }
+      .info {
+        @include font($font-inter, 0.875rem, #334155, 400);
+      }
+    }
+  }
+}

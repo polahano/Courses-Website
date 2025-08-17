@@ -1,0 +1,52 @@
+@use "../abstracts" as *;
+
+.nav-content {
+  padding-inline: 37px;
+  padding-block: 19px;
+  position: relative;
+
+  img.nav-logo {
+    width: 94px;
+    height: 36px;
+  }
+
+  .nav-menu {
+    background-color: aqua;
+    transition: all 1s ease-in-out;
+
+    .nav-menu-icon {
+      width: 32px;
+      height: auto;
+      cursor: pointer;
+      transition: all 1s ease-in-out;
+
+      @include screen-md {
+        display: none;
+      }
+    }
+
+    .nav-menu-items {
+      @include screen-md {
+        display: flex !important;
+        position: relative;
+      }
+      position: absolute;
+      right: 0;
+      left: 0;
+      top: 100%;
+      width: 100%;
+      background-color: $gray-secondary;
+      padding: 10px;
+
+      .login {
+        @include button(white, 10px, 10px, 0);
+        color: $blue-primary;
+        border: $blue-primary 2px solid;
+      }
+      .signup {
+        @include button($blue-primary, 10px, 10px, 0);
+        color: white;
+      }
+    }
+  }
+}
