@@ -1,6 +1,8 @@
 <div class="navbar-container">
   <div class="nav-content d-flex justify-content-between">
-    <img src="/images/logo 1.png" alt="Linkdev Logo" class="nav-logo" />
+    <div class="nav-logo">
+      <img src="/images/logo 1.png" alt="Linkdev Logo" class="h-100" />
+    </div>
     <div class="nav-menu">
       <img
         src="/icons/menu.svg"
@@ -8,11 +10,10 @@
         class="nav-menu-icon"
         (click)="toggleMenu()"
       />
-      <div
-        class="nav-menu-items"
-        [style.display]="isMenuOpen ? 'flex' : 'none'"
-      >
-        <i src="icons/cart.svg" class="text-bg-danger"></i>
+      <div class="nav-menu-items" [class.open]="isMenuOpen">
+        <div class="cart-image">
+          <img src="icons/cart-blue.svg" alt="cart icon" class="" />
+        </div>
         <button class="login">Log In</button>
         <button class="signup">Sign Up</button>
       </div>

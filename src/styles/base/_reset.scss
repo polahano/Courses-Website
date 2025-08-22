@@ -1,3 +1,5 @@
+@use "../abstracts" as *;
+
 /* Box sizing rules */
 *,
 *::before,
@@ -8,7 +10,15 @@
 }
 
 html {
-  font-size: 16px; // 1rem = 16px by default
+  @include screen-sm {
+    font-size: $font-sm-default;
+  }
+  @include screen-md {
+    font-size: $font-md-default;
+  }
+  @include screen-lg {
+    font-size: $font-lg-default;
+  }
 }
 
 h1,

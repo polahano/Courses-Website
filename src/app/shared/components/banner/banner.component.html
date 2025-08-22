@@ -1,0 +1,32 @@
+@if (banners) {
+<ngb-carousel>
+  @for(banner of banners; track $index){
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <div class="position-relative">
+        <img [src]="banner.image" alt="Random first slide" class="w-100" />
+        <div class="text">
+          <h1 class="title">
+            Better
+            <span [style.color]="'#' + banner.colorCode">Insights</span> For
+            Business
+            <span [style.color]="'#' + banner.colorCode">Growth</span>
+          </h1>
+          <p class="desc">
+            {{ banner.brief }}
+          </p>
+          <button
+            type="button"
+            class="get-started-button"
+            [style.backgroundColor]="'#' + banner.colorCode"
+            title="Get Started"
+          >
+            Get Started
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  }
+</ngb-carousel>
+}

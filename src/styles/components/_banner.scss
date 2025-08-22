@@ -1,0 +1,28 @@
+@use "../abstracts" as *;
+
+ngb-carousel {
+  @include screen-sm {
+    display: none !important;
+  }
+}
+
+.picsum-img-wrapper {
+  .text {
+    position: absolute;
+    top: 20%;
+    left: 11%;
+    width: 35%;
+
+    .title {
+      @include font($font-dmsans, 2.5rem, "", 700);
+    }
+
+    .desc {
+      @include font($font-poppins, "", $gray-primary, 400);
+    }
+    .get-started-button {
+      @include button("", 28px, 8px, 8px);
+      @include font($font-inter, 0.857rem, white, 600);
+    }
+  }
+}

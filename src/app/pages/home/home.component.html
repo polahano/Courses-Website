@@ -1,17 +1,19 @@
 <section>
   <div class="hero-header">
     <div class="hero-text">
-      <h1 class="title">
-        Better <span class="light-blue-text">Insights</span> For Business
-        <span class="light-blue-text">Growth</span>
-      </h1>
-      <p class="desc">
-        Learn UI-UX Design skills with weekend UX . The latest online learning
-        system and material that help your knowledge growing.
-      </p>
-      <button type="button" class="get-started-button" title="Get Started">
-        Get Started
-      </button>
+      <div>
+        <h1 class="title">
+          Better <span class="light-blue-text">Insights</span> For Business
+          <span class="light-blue-text">Growth</span>
+        </h1>
+        <p class="desc">
+          Learn UI-UX Design skills with weekend UX . The latest online learning
+          system and material that help your knowledge growing.
+        </p>
+        <button type="button" class="get-started-button" title="Get Started">
+          Get Started
+        </button>
+      </div>
     </div>
     <img
       src="images/Group 2216.svg"
@@ -19,13 +21,62 @@
       class="hero-image mobile-content"
     />
   </div>
+  <app-banner></app-banner>
 </section>
+<section class="numbers">
+  <div class="numbers-container d-flex flex-row justify-content-between">
+    <div class="number-increase text-md-center">
+      <om-number-ticker
+        [countTo]="250"
+        styleClass="ticker-custom-style"
+      ></om-number-ticker>
+      <p>Courses by our best mentors</p>
+    </div>
+    <div class="vertical-line"></div>
+    <div class="number-increase text-md-center">
+      <om-number-ticker
+        [countTo]="1000"
+        styleClass="ticker-custom-style"
+      ></om-number-ticker>
+      <p>Courses by our best mentors</p>
+    </div>
+    <div class="vertical-line"></div>
+    <div class="number-increase text-md-center">
+      <om-number-ticker
+        [countTo]="15"
+        styleClass="ticker-custom-style"
+      ></om-number-ticker>
+      <p>Courses by our best mentors</p>
+    </div>
+    <div class="vertical-line"></div>
+    <div class="number-increase text-md-center">
+      <om-number-ticker
+        [countTo]="2400"
+        styleClass="ticker-custom-style"
+      ></om-number-ticker>
+      <p>Courses by our best mentors</p>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="gallery">
-    <p class="title">
-      <span class="light-blue-text">Check</span> our latest Media Gallery
-    </p>
-    <p class="desc"></p>
+    <div>
+      <p class="title">
+        <span class="light-blue-text">Check</span> our latest Media Gallery
+      </p>
+      <p class="desc">
+        Every picture holds a moment, every moment holds a story
+      </p>
+      <button
+        type="button"
+        class="view-photos-button-md"
+        title="View All Photos"
+      >
+        View All Photos
+      </button>
+    </div>
+
     <div class="carousel scroll-x">
       @for(img of sliderImages; track img.id){
       <img
@@ -43,6 +94,71 @@
 <section>
   <div class="top-courses">
     <h2>Top Courses</h2>
+
+    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+      <li [ngbNavItem]="1">
+        <button ngbNavLink>All</button>
+        <ng-template ngbNavContent>
+          <div class="nav-cards">
+            @for (course of filterCourses('all');track course.id){
+            <app-course-card [course]="course"></app-course-card>
+            }
+          </div>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <button ngbNavLink>Development</button>
+        <ng-template ngbNavContent>
+          <div class="nav-cards">
+            @for (course of filterCourses('Development');track course.id){
+            <app-course-card [course]="course"></app-course-card>
+            }
+          </div>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="3">
+        <button ngbNavLink>Data Science</button>
+        <ng-template ngbNavContent>
+          <div class="">
+            <div class="row">
+              @for (course of filterCourses('Data Science');track course.id){
+              <app-course-card
+                [course]="course"
+                class="col-3"
+              ></app-course-card>
+              }
+            </div>
+          </div>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="4">
+        <button ngbNavLink>DevOps</button>
+        <ng-template ngbNavContent>
+          <div class="">
+            <div class="row">
+              @for (course of filterCourses('DevOps');track course.id){
+              <app-course-card
+                [course]="course"
+                class="col-3"
+              ></app-course-card>
+              }
+            </div>
+          </div>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="5">
+        <button ngbNavLink>Cloud Computing</button>
+        <ng-template ngbNavContent>
+          <div class="nav-cards">
+            @for (course of filterCourses('Cloud Computing');track course.id){
+            <app-course-card [course]="course"></app-course-card>
+            }
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
     <div class="courses-cards">
       @for(course of coursesList.slice(0,3);track course.id){
       <app-course-card [course]="course"></app-course-card>
@@ -50,3 +166,11 @@
     </div>
   </div>
 </section>
+
+<owl-carousel-o [options]="customOptions">
+  @for (image of sliderImages; track image.id) {
+  <ng-template carouselSlide [id]="image.id.toString()">
+    <img [src]="image.image" alt="gallery image" />
+  </ng-template>
+  }
+</owl-carousel-o>

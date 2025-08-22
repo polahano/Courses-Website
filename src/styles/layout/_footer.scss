@@ -6,6 +6,13 @@ section {
     background-color: $bg-dark-blue;
     color: white;
     @include flex(column, 20px);
+    @include screen-md {
+      @include flex(row, "");
+      justify-content: space-between;
+      padding-inline: 43px;
+      padding-block: 106px;
+      background-color: #1e293b;
+    }
     ul {
       @include font($font-inter, 0.875rem, white, 600);
       list-style: none;
@@ -16,19 +23,53 @@ section {
     .logo {
       width: 30%;
       margin-bottom: 20px;
+      @include screen-md {
+        width: 101px;
+      }
     }
     .get-help {
       @include font($font-inter, 1.125rem, white, 800);
-      border-bottom: $gray-secondary 2px solid;
+      @include screen-sm {
+        border-bottom: $gray-secondary 2px solid;
+      }
+      li {
+        @include font($font-inter, 0.875rem, #cbd5e1, 500);
+      }
     }
     .contact {
       @include font($font-inter, 1.125rem, white, 800);
-
       padding-bottom: 10px;
-      border-bottom: $gray-secondary 2px solid;
+      @include screen-sm {
+        border-bottom: $gray-secondary 2px solid;
+      }
+      li {
+        @include font($font-inter, 0.875rem, #cbd5e1, 500);
+      }
+      img.social-img {
+        @include screen-md {
+          display: none;
+        }
+      }
+      .social-icons {
+        display: none;
+        @include screen-md {
+          @include flex(row, 20px);
+        }
+      }
     }
     .copyright {
       @include font($font-poppins, 0.75rem, $gray-primary, 400);
+      @include screen-md {
+        display: none;
+      }
+    }
+
+    .desc {
+      @include screen-sm {
+        display: none;
+      }
+      @include font($font-inter, 0.875rem, #cbd5e1, 400);
+      flex-basis: 40%;
     }
   }
 }

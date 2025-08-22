@@ -5,7 +5,6 @@
     border: #e2e8f0 2px solid;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.105),
       0 3px 10px 0 rgba(0, 0, 0, 0.062);
-
     -webkit-border-radius: 16px;
     -moz-border-radius: 16px;
     -ms-border-radius: 16px;
@@ -16,7 +15,10 @@
     .image {
       position: relative;
       img.course-image {
+        aspect-ratio: 16/9;
         width: 100%;
+        object-fit: cover;
+        filter: brightness(50%);
         -webkit-border-radius: 8px;
         -moz-border-radius: 8px;
         -ms-border-radius: 8px;

@@ -3,22 +3,24 @@
 .nav-content {
   padding-inline: 37px;
   padding-block: 19px;
+  @include screen-md {
+    padding-top: 14px;
+    padding-inline: 30px;
+  }
   position: relative;
 
-  img.nav-logo {
-    width: 94px;
+  .nav-logo {
     height: 36px;
+    @include screen-md {
+      height: 46px;
+    }
   }
 
   .nav-menu {
-    background-color: aqua;
-    transition: all 1s ease-in-out;
-
     .nav-menu-icon {
       width: 32px;
       height: auto;
       cursor: pointer;
-      transition: all 1s ease-in-out;
 
       @include screen-md {
         display: none;
@@ -26,10 +28,18 @@
     }
 
     .nav-menu-items {
+      opacity: 0;
+      @include flex(row, 20px);
       @include screen-md {
-        display: flex !important;
-        position: relative;
+        position: static;
+        opacity: 1;
+        background-color: transparent;
       }
+      -webkit-transition: all 1s ease-in-out;
+      -moz-transition: all 1s ease-in-out;
+      -ms-transition: all 1s ease-in-out;
+      -o-transition: all 1s ease-in-out;
+      transition: all 1s ease-in-out;
       position: absolute;
       right: 0;
       left: 0;
@@ -37,6 +47,15 @@
       width: 100%;
       background-color: $gray-secondary;
       padding: 10px;
+      &.open {
+        opacity: 1;
+      }
+
+      img {
+        width: 32px;
+        height: auto;
+        margin-right: 30px;
+      }
 
       .login {
         @include button(white, 10px, 10px, 0);
