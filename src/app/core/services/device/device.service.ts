@@ -9,7 +9,7 @@ export class DeviceService {
 const ID = inject(PLATFORM_ID);
 
   isMobileDevice(): boolean {
-    if(isPlatformBrowser(ID){
+    if(isPlatformBrowser(this.ID){
       return window.innerWidth <= 599;
     }
   }
