@@ -12,6 +12,9 @@ section.checkout {
   .data {
     .bread {
       @include flex(row, 20px);
+      @include screen-sm {
+        @include flex(column, 20px);
+      }
       h2 {
         @include font($font-inter, 1.33rem, "", 600);
       }
@@ -31,10 +34,6 @@ section.checkout {
         }
       }
 
-      .payment-details {
-        @include font($font-inter, 0.778rem, "", 400);
-      }
-
       p.payment-method,
       .payment-details p.credit-debit {
         @include font($font-inter, 1rem, "", 600);
@@ -42,6 +41,7 @@ section.checkout {
 
       .payment-details {
         @include flex(column, 20px);
+        @include font($font-inter, 0.778rem, "", 400);
         background: #f8fafc;
         -webkit-border-radius: 8px;
         -moz-border-radius: 8px;

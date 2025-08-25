@@ -2,6 +2,8 @@
 
 section.order-complete {
   .content {
+    padding: 16px;
+    text-align: center;
     @include flex(column, 20px);
     min-height: 100vh;
     justify-content: center;

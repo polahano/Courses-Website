@@ -21,7 +21,13 @@
         {{ course()?.hours }} Total Hours. {{ course()?.lectures }} Lectures.
       </p>
     </div>
+    @if(deviceService.isMobileDevice()){
+    <p class="price">${{ course()?.price }}</p>
     <p class="remove">Remove</p>
+    } @else {
+    <p class="remove">Remove</p>
+    <p class="price">${{ course()?.price }}</p>
+
+    }
   </div>
-  <p class="price">${{ course()?.price }}</p>
 </div>

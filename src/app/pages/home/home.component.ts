@@ -23,15 +23,17 @@ export class HomeComponent implements OnInit {
 
   isMobile: boolean = false;
 
+
   constructor() {
-    this.checkDevice();
-    window.addEventListener('resize', () => this.checkDevice());
+    this.deviceService.isMobileDevice()
+    window.addEventListener('resize', () => this.deviceService.isMobileDevice());
   }
 
-  checkDevice() {
-    this.isMobile = window.innerWidth <= 599; // breakpoint for mobile
-  }
+  // checkDevice() {
+  //   this.isMobile = window.innerWidth <= 599; // breakpoint for mobile
+  // }
 
+  readonly deviceService = inject(DeviceService)
   private readonly galleryService = inject(GalleryService)
   private readonly coursesService = inject(CoursesService)
   // readonly deviceService = inject(DeviceService)

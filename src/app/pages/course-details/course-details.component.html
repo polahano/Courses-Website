@@ -42,8 +42,8 @@
             <p class="new">${{ course?.price }}</p>
             @if(course?.discount!>0){
             <p class="old">${{ course?.price! + course?.discount! }}</p>
-            }
             <p class="discount">-${{ course?.discount }}</p>
+            }
           </div>
           <button class="add-to-cart-btn">Add to Cart</button>
           <button class="buy-now-btn">Buy Now</button>

@@ -7,7 +7,7 @@
     <div class="checkout-form">
       <form (ngSubmit)="onSubmit()" [formGroup]="checkoutForm">
         <div class="row">
-          <div class="country-input col d-flex flex-column p-fluid">
+          <div class="country-input col-12 col-md-6 d-flex flex-column p-fluid">
             <label for="country"
               >Country <span class="text-danger">*</span></label
             >
@@ -25,7 +25,7 @@
               [inputStyle]="{ width: '100%' }"
             />
           </div>
-          <div class="state-input col d-flex flex-column">
+          <div class="state-input col-12 col-md-6 d-flex flex-column">
             <label for="country"
               >State <span class="text-danger">*</span></label
             >
@@ -81,7 +81,7 @@
             </p-inputMask>
           </div>
           <div class="row mt-1">
-            <div class="col d-flex flex-column">
+            <div class="col-12 col-md-6 d-flex flex-column">
               <label for="date"
                 >Expiry Date <span class="text-danger">*</span></label
               >
@@ -97,7 +97,7 @@
                 [minDate]="currentMonthDate"
               />
             </div>
-            <div class="col d-flex flex-column">
+            <div class="col-12 col-md-6 d-flex flex-column">
               <label for="cvv">CVV <span class="text-danger">*</span></label>
               <p-password
                 formControlName="cvv"

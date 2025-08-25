@@ -4,9 +4,14 @@
 section.course-details {
   .details-container {
     padding: 40px;
-
+    @include screen-sm {
+      padding: 16px;
+    }
     .content {
       @include flex(row, 7%);
+      @include screen-sm {
+        @include flex(column-reverse, 20px);
+      }
       .text {
         @include flex(column, 16px);
         background-color: #f8fafc;
@@ -31,6 +36,7 @@ section.course-details {
         }
         .created-by {
           @include flex(row, 10px);
+          align-items: center;
         }
         .lang {
           @include flex(row, 10px);

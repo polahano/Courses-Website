@@ -3,8 +3,14 @@
 
 .order-details {
   margin-top: 80px;
+  @include screen-sm {
+    margin-top: 20px;
+  }
   .title {
     @include font($font-inter, 1.11rem, #2437ac, 600);
+    @include screen-sm {
+      text-align: center;
+    }
   }
   .price-card {
     -webkit-border-radius: 8px;
@@ -39,6 +45,9 @@
         font-size: 1.11rem;
         font-weight: 600;
       }
+    }
+    hr {
+      margin-block: 16px;
     }
   }
   button.proceed {

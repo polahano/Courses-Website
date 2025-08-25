@@ -4,12 +4,24 @@
 section.shopping-cart {
   .content {
     @include flex(row, 10%);
+    @include screen-sm {
+      @include flex(column, 16px);
+    }
+
     padding: 26px 57px;
-    .cart {
-      .cards {
-        @include flex(column, 20px);
+    @include screen-sm {
+      padding: 20px;
+    }
+    .text {
+      flex-basis: 70%;
+
+      .cart {
+        .cards {
+          @include flex(column, 20px);
+        }
       }
     }
+
     app-order-price {
       flex-basis: 30%;
     }

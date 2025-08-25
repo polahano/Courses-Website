@@ -12,11 +12,18 @@ div.card {
   border-radius: 16px;
   padding: 16px;
   @include flex(row, 20px);
+  @include screen-sm {
+    @include flex(column, 20px);
+  }
   .image {
     position: relative;
     img {
       aspect-ratio: 16/9;
       height: 150px;
+      @include screen-sm {
+        width: 100%;
+        aspect-ratio: 16/9;
+      }
       object-fit: cover;
       -webkit-border-radius: 8px;
       -moz-border-radius: 8px;

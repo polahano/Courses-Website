@@ -96,7 +96,7 @@
 <section>
   <div class="top-courses">
     <h2>Top Courses</h2>
-    @if(isMobile){
+    @if(deviceService.isMobileDevice()){
     <div class="courses-cards">
       @for(course of coursesList.slice(0,3);track course.id){
       <app-course-card [course]="course"></app-course-card>
