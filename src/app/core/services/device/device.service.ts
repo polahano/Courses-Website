@@ -1,13 +1,16 @@
-import { Injectable } from '@angular/core';
+import { inject, PLATFORM_ID, Injectable } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeviceService {
 
+const ID = inject(PLATFORM_ID);
+
   isMobileDevice(): boolean {
-    return window.innerWidth <= 599; // breakpoint for mobile
-
+    if(isPlatformBrowser(ID){
+      return window.innerWidth <= 599;
+    }
   }
-
 }
