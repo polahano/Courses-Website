@@ -1,0 +1,19 @@
+@use "../abstracts" as *;
+
+section.order-complete {
+  .content {
+    @include flex(column, 20px);
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 200px;
+    }
+    .order {
+      @include font($font-inter, 2.33rem, "", 700);
+    }
+    .email {
+      @include font($font-inter, 1.33rem, "", 600);
+    }
+  }
+}

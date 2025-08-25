@@ -1,0 +1,48 @@
+@use "../../../../styles/abstracts" as *;
+@use "../../../../styles/base" as *;
+
+.order-details {
+  margin-top: 80px;
+  .title {
+    @include font($font-inter, 1.11rem, #2437ac, 600);
+  }
+  .price-card {
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #f8fafc;
+    border: #e2e8f0 2px solid;
+
+    .price,
+    .discount,
+    .tax,
+    .total {
+      @include flex(row, 20px);
+      justify-content: space-between;
+      color: #0f172a;
+      p.key {
+        @include font($font-inter, 0.889rem, "", 400);
+      }
+      p.value {
+        @include font($font-inter, 1rem, "", 600);
+      }
+    }
+    .discount {
+      padding-block: 19px;
+    }
+    .total {
+      p.key,
+      p.value {
+        font-size: 1.11rem;
+        font-weight: 600;
+      }
+    }
+  }
+  button.proceed {
+    @extend .blue-button;
+    margin-top: 16px;
+  }
+}

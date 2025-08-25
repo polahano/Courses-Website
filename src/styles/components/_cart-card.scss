@@ -1,0 +1,66 @@
+@use "../components/course-card" as *;
+@use "../abstracts" as *;
+
+div.card {
+  border: #e2e8f0 2px solid;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.105),
+    0 3px 10px 0 rgba(0, 0, 0, 0.062);
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -ms-border-radius: 16px;
+  -o-border-radius: 16px;
+  border-radius: 16px;
+  padding: 16px;
+  @include flex(row, 20px);
+  .image {
+    position: relative;
+    img {
+      aspect-ratio: 16/9;
+      height: 150px;
+      object-fit: cover;
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      -ms-border-radius: 8px;
+      -o-border-radius: 8px;
+      border-radius: 8px;
+    }
+    p.discount {
+      @include font($font-inter, 0.75rem, white, 700);
+      background-color: $pink-primary;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      padding: 5px 10px;
+    }
+  }
+  .details {
+    @include flex(column, 10px);
+    .course-name {
+      cursor: pointer;
+      @include font($font-inter, 1.125rem, #0f172a, 600);
+    }
+    .instructor {
+      @include font($font-inter, 0.875rem, #334155, 400);
+    }
+    .rating {
+      @include flex(row, 10px);
+      @include font($font-inter, 0.75rem, #334155, 600);
+      .fa-star {
+        color: $gold;
+        font-size: 1rem;
+      }
+    }
+    .info {
+      @include font($font-inter, 0.875rem, #334155, 400);
+    }
+  }
+  .remove {
+    @include font($font-inter, 0.778rem, #334155, 400);
+    color: #dc2626;
+    cursor: pointer;
+  }
+  .price {
+    @include font($font-poppins, 1.33rem, "", 600);
+    margin-left: auto;
+  }
+}

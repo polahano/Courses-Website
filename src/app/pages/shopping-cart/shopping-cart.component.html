@@ -1,1 +1,26 @@
-<p>shopping-cart works!</p>
+<section class="shopping-cart">
+  <div class="content">
+    <div style="flex-basis: 70%">
+      @if(isCheckout()==false){
+      <div class="cart">
+        <app-breadcrumb></app-breadcrumb>
+        <h2>Shopping Cart</h2>
+        <p>3 Course(s) in cart</p>
+        <div class="cards">
+          @for(course of cousesService.coursesCart(); track $index){
+          <app-cart-card [course]="course"></app-cart-card>
+          }
+        </div>
+      </div>
+      }@else {
+      <router-outlet></router-outlet>
+      }
+    </div>
+
+    <app-order-price
+      [totalDiscount]="cousesService.totalDiscount()"
+      [totalPrice]="cousesService.totalPrice()"
+      [isCheckout]="isCheckout()"
+    ></app-order-price>
+  </div>
+</section>

@@ -3,3 +3,9 @@
 .light-blue-text {
   color: $blue-primary;
 }
+
+.blue-button {
+  @include button($blue-primary, "", 13px, 8px);
+  @include font($font-inter, 0.778rem, white, 500);
+  width: 100%;
+}

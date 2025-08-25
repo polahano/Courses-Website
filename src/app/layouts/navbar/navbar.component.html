@@ -11,9 +11,11 @@
         (click)="toggleMenu()"
       />
       <div class="nav-menu-items" [class.open]="isMenuOpen">
-        <div class="cart-image">
+        <div class="cart-image" routerLink="categories/details/shopping-cart">
           <img src="icons/cart-blue.svg" alt="cart icon" class="" />
+          <div class="circle">{{ coursesCount }}</div>
         </div>
+
         <button class="login">Log In</button>
         <button class="signup">Sign Up</button>
       </div>

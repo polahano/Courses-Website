@@ -34,6 +34,7 @@
         position: static;
         opacity: 1;
         background-color: transparent;
+        align-items: center;
       }
       -webkit-transition: all 1s ease-in-out;
       -moz-transition: all 1s ease-in-out;
@@ -50,11 +51,30 @@
       &.open {
         opacity: 1;
       }
-
-      img {
-        width: 32px;
-        height: auto;
-        margin-right: 30px;
+      .cart-image {
+        position: relative;
+        cursor: pointer;
+        img {
+          width: 13px;
+          height: auto;
+          margin-right: 80px;
+        }
+        .circle {
+          position: absolute;
+          text-align: center;
+          top: 0;
+          left: 10px;
+          font-size: 0.5rem;
+          color: white;
+          background-color: $orange-primary;
+          width: 15px;
+          height: 15px;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          -ms-border-radius: 50%;
+          -o-border-radius: 50%;
+          border-radius: 50%;
+        }
       }
 
       .login {

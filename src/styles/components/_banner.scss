@@ -12,6 +12,7 @@ ngb-carousel {
     top: 20%;
     left: 11%;
     width: 35%;
+    @include flex(column, 16px);
 
     .title {
       @include font($font-dmsans, 2.5rem, "", 700);

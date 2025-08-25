@@ -1,1 +1,117 @@
-<p>checkout works!</p>
+<section class="checkout">
+  <div class="data">
+    <div class="bread">
+      <h2>Checkout Page</h2>
+      <app-breadcrumb></app-breadcrumb>
+    </div>
+    <div class="checkout-form">
+      <form (ngSubmit)="onSubmit()" [formGroup]="checkoutForm">
+        <div class="row">
+          <div class="country-input col d-flex flex-column p-fluid">
+            <label for="country"
+              >Country <span class="text-danger">*</span></label
+            >
+            <p-autocomplete
+              formControlName="country"
+              inputId="country"
+              [suggestions]="filteredCountries()"
+              (completeMethod)="searchCountries($event)"
+              (onSelect)="onCountrySelected($event)"
+              placeholder="Enter Country"
+              required
+              [forceSelection]="true"
+              [style]="{ width: '100%' }"
+              [styleClass]="'w-100 align-self-stretch'"
+              [inputStyle]="{ width: '100%' }"
+            />
+          </div>
+          <div class="state-input col d-flex flex-column">
+            <label for="country"
+              >State <span class="text-danger">*</span></label
+            >
+            <p-autocomplete
+              formControlName="state"
+              [suggestions]="filteredStates()"
+              (completeMethod)="searchStates($event)"
+              placeholder="Enter State"
+              required
+              [forceSelection]="true"
+              [style]="{ width: '100%' }"
+              [styleClass]="'w-100 align-self-stretch'"
+              [inputStyle]="{ width: '100%' }"
+            />
+          </div>
+        </div>
+        <p class="payment-method mt-3">Payment Method</p>
+        <div class="payment-details">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex gap-2">
+              <input type="radio" value="Credit/Debit Card" checked />
+              <p class="credit-debit">Credit/Debit Card</p>
+            </div>
+            <img src="/images/visa.png" alt="Visa Master Card" />
+          </div>
+          <div class="d-flex flex-column mt-1">
+            <label for="name"
+              >Name of Card <span class="text-danger">*</span></label
+            >
+            <p-autocomplete
+              formControlName="cardName"
+              required
+              placeholder="Enter Your Name"
+              [style]="{ width: '100%' }"
+              [styleClass]="'w-100 align-self-stretch'"
+              [inputStyle]="{ width: '100%' }"
+            />
+          </div>
+          <div class="d-flex flex-column mt-1">
+            <label for="number"
+              >Card Number <span class="text-danger">*</span></label
+            >
+            <p-inputMask
+              formControlName="cardNumber"
+              mask="9999 9999 9999 9999"
+              [autoClear]="false"
+              [slotChar]="''"
+              placeholder="Enter Your Card Number"
+              [style]="{ width: '100%' }"
+              [styleClass]="'w-100 align-self-stretch'"
+              required
+            >
+            </p-inputMask>
+          </div>
+          <div class="row mt-1">
+            <div class="col d-flex flex-column">
+              <label for="date"
+                >Expiry Date <span class="text-danger">*</span></label
+              >
+              <p-datepicker
+                formControlName="expiryDate"
+                view="month"
+                [readonlyInput]="true"
+                [dateFormat]="'mm/yy'"
+                [style]="{ width: '100%' }"
+                [styleClass]="'w-100 align-self-stretch'"
+                [inputStyle]="{ width: '100%' }"
+                required
+                [minDate]="currentMonthDate"
+              />
+            </div>
+            <div class="col d-flex flex-column">
+              <label for="cvv">CVV <span class="text-danger">*</span></label>
+              <p-password
+                formControlName="cvv"
+                feedback="false"
+                required
+                maxLength="3"
+                [style]="{ width: '100%' }"
+                [styleClass]="'w-100 align-self-stretch'"
+                [inputStyle]="{ width: '100%' }"
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

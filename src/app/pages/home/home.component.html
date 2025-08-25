@@ -24,7 +24,8 @@
   <app-banner></app-banner>
 </section>
 <section class="numbers">
-  <div class="numbers-container d-flex flex-row justify-content-between">
+  <div class="numbers-container">
+    @if(isBrowser){
     <div class="number-increase text-md-center">
       <om-number-ticker
         [countTo]="250"
@@ -56,6 +57,7 @@
       ></om-number-ticker>
       <p>Courses by our best mentors</p>
     </div>
+    }
   </div>
 </section>
 
@@ -94,15 +96,26 @@
 <section>
   <div class="top-courses">
     <h2>Top Courses</h2>
-
+    @if(isMobile){
+    <div class="courses-cards">
+      @for(course of coursesList.slice(0,3);track course.id){
+      <app-course-card [course]="course"></app-course-card>
+      }
+    </div>
+    } @else {
     <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
       <li [ngbNavItem]="1">
         <button ngbNavLink>All</button>
         <ng-template ngbNavContent>
           <div class="nav-cards">
-            @for (course of filterCourses('all');track course.id){
-            <app-course-card [course]="course"></app-course-card>
-            }
+            <div class="row">
+              @for (course of filterCourses('all');track course.id){
+              <app-course-card
+                [course]="course"
+                class="col-md-4 col-lg-3 col-6 g-3"
+              ></app-course-card>
+              }
+            </div>
           </div>
         </ng-template>
       </li>
@@ -110,9 +123,14 @@
         <button ngbNavLink>Development</button>
         <ng-template ngbNavContent>
           <div class="nav-cards">
-            @for (course of filterCourses('Development');track course.id){
-            <app-course-card [course]="course"></app-course-card>
-            }
+            <div class="row">
+              @for (course of filterCourses('Development');track course.id){
+              <app-course-card
+                [course]="course"
+                class="col-md-4 col-lg-3 col-6 g-3"
+              ></app-course-card>
+              }
+            </div>
           </div>
         </ng-template>
       </li>
@@ -124,7 +142,7 @@
               @for (course of filterCourses('Data Science');track course.id){
               <app-course-card
                 [course]="course"
-                class="col-3"
+                class="col-md-4 col-lg-3 col-6 g-3"
               ></app-course-card>
               }
             </div>
@@ -139,7 +157,7 @@
               @for (course of filterCourses('DevOps');track course.id){
               <app-course-card
                 [course]="course"
-                class="col-3"
+                class="col-md-4 col-lg-3 col-6 g-3"
               ></app-course-card>
               }
             </div>
@@ -149,28 +167,29 @@
       <li [ngbNavItem]="5">
         <button ngbNavLink>Cloud Computing</button>
         <ng-template ngbNavContent>
-          <div class="nav-cards">
-            @for (course of filterCourses('Cloud Computing');track course.id){
-            <app-course-card [course]="course"></app-course-card>
-            }
+          <div class="">
+            <div class="row">
+              @for (course of filterCourses('Cloud Computing');track course.id){
+              <app-course-card
+                [course]="course"
+                class="col-md-4 col-lg-3 col-6 g-3"
+              ></app-course-card>
+              }
+            </div>
           </div>
         </ng-template>
       </li>
     </ul>
     <div [ngbNavOutlet]="nav" class="mt-2"></div>
-
-    <div class="courses-cards">
-      @for(course of coursesList.slice(0,3);track course.id){
-      <app-course-card [course]="course"></app-course-card>
-      }
-    </div>
+    <div class="half-circle"></div>
+    }
   </div>
 </section>
 
-<owl-carousel-o [options]="customOptions">
+<!-- <owl-carousel-o [options]="customOptions">
   @for (image of sliderImages; track image.id) {
   <ng-template carouselSlide [id]="image.id.toString()">
     <img [src]="image.image" alt="gallery image" />
   </ng-template>
   }
-</owl-carousel-o>
+</owl-carousel-o> -->

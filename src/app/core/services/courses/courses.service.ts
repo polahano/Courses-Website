@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 
@@ -9,6 +9,12 @@ import { Observable } from 'rxjs';
 export class CoursesService {
 
   constructor(private httpClient: HttpClient) { }
+
+  coursesCart = signal([]);
+  totalPrice = signal(0);
+  totalDiscount = signal(0);
+  tax = 20;
+  cartNumber = signal(0);
 
 
   getAllCourses(): Observable<any> {

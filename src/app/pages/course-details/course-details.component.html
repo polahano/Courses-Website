@@ -1,1 +1,59 @@
-<p>course-details works!</p>
+<section class="course-details">
+  <div class="details-container">
+    <div class="content">
+      <div class="text">
+        <app-breadcrumb></app-breadcrumb>
+        <h2 class="title">{{ course?.title }}</h2>
+        <p class="desc">{{ course?.description }}</p>
+        <div class="details">
+          <div class="stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="line">|</p>
+          <p>
+            {{ course?.hours }} Total Hours. {{ course?.lectures }} Lectures.
+          </p>
+        </div>
+        <div class="created-by">
+          <img src="/images/Ellipse 5.png" alt="{{ course?.author }}" />
+          <p>
+            Created by <span>{{ course?.author }}</span>
+          </p>
+        </div>
+        <div class="lang">
+          <img src="/icons/globe-02.svg" alt="" />
+          <p>English, Spanish, Italian, German</p>
+        </div>
+      </div>
+      <div class="myCard">
+        <div class="details">
+          <div class="image">
+            <img
+              [src]="course?.image"
+              alt="{{ course?.title }}"
+              class="course-image w-100"
+            />
+          </div>
+          <div class="price">
+            <p class="new">${{ course?.price }}</p>
+            @if(course?.discount!>0){
+            <p class="old">${{ course?.price! + course?.discount! }}</p>
+            }
+            <p class="discount">-${{ course?.discount }}</p>
+          </div>
+          <button class="add-to-cart-btn">Add to Cart</button>
+          <button class="buy-now-btn">Buy Now</button>
+        </div>
+        <hr class="m-0" />
+        <div class="share">
+          <p>Share</p>
+          <img src="/images/social.png" alt="social links" class="w-100" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

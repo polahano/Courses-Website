@@ -1,0 +1,17 @@
+@use "../abstracts" as *;
+@use "../base" as *;
+
+section.shopping-cart {
+  .content {
+    @include flex(row, 10%);
+    padding: 26px 57px;
+    .cart {
+      .cards {
+        @include flex(column, 20px);
+      }
+    }
+    app-order-price {
+      flex-basis: 30%;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<div class="order-details">
+  <p class="title">Order Deails</p>
+  <div class="price-card">
+    <div class="price">
+      <p class="key">Price</p>
+      <p class="value">${{ totalPrice() }}</p>
+    </div>
+    <div class="discount">
+      <p class="key">Discount</p>
+      <p class="value">${{ totalDiscount() }}</p>
+    </div>
+    <div class="tax">
+      <p class="key">Tax</p>
+      <p class="value">$20</p>
+    </div>
+    <hr />
+    <div class="total">
+      <p class="key">Total</p>
+      <p class="value">${{ totalPrice() + tax }}</p>
+    </div>
+  </div>
+  @if(isCheckout()){
+  <button
+    class="proceed"
+    routerLink="/order-complete"
+    (click)="changeCheckoutState()"
+  >
+    Proceed to Checkout
+  </button>
+  }@else {
+  <button class="proceed" routerLink="checkout" (click)="changeCheckoutState()">
+    Proceed to Checkout
+  </button>
+  }
+</div>

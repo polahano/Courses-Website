@@ -1,0 +1,27 @@
+<div class="card">
+  <div class="image">
+    <img [src]="course()?.image" alt="{{ course()?.title }}" />
+    @if(course()?.discount! >0){
+    <p class="discount">-${{ course()?.discount }}</p>
+    }
+  </div>
+  <div class="details">
+    <h3 class="course-name">{{ course()?.title }}</h3>
+    <p class="instructor">By {{ course()?.author }}</p>
+    <div class="rating">
+      <div class="stars">
+        <i class="fa-solid fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+      </div>
+      <p class="line">|</p>
+      <p>
+        {{ course()?.hours }} Total Hours. {{ course()?.lectures }} Lectures.
+      </p>
+    </div>
+    <p class="remove">Remove</p>
+  </div>
+  <p class="price">${{ course()?.price }}</p>
+</div>

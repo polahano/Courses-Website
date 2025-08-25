@@ -5,13 +5,12 @@
     display: none;
   }
   .hero-text {
-    div {
-      padding: 32px;
-      @include flex(column, 20px);
-      @include screen-md {
-        width: 50%;
-        padding-inline: 100px;
-      }
+    @include flex(column, 20px);
+    padding: 32px;
+
+    @include screen-md {
+      width: 50%;
+      padding-inline: 100px;
     }
 
     .title {
@@ -20,7 +19,6 @@
         font-size: 0.75rem;
       }
     }
-
     .desc {
       @include font($font-poppins, "", $gray-primary, 400);
     }
@@ -99,7 +97,10 @@
 }
 
 .top-courses {
+  position: relative;
   padding-block: 30px;
+  overflow: hidden;
+
   h2 {
     text-align: center;
     margin-bottom: 40px;
@@ -108,9 +109,23 @@
   .courses-cards {
     @include flex(row, 20px);
     flex-wrap: wrap;
-    @include screen-md {
-      display: none;
-    }
+    // @include screen-md {
+    //   display: none;
+    // }
+  }
+  .half-circle {
+    position: absolute;
+    top: -30%;
+    right: -30px;
+    background-color: $bg-light-blue;
+    height: 264px;
+    z-index: -1;
+    aspect-ratio: 1/1;
+    -o-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
   }
 }
 
@@ -121,6 +136,10 @@ section.numbers {
 .numbers-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  @include screen-sm {
+    flex-direction: column;
+  }
   .number-increase {
     display: flex;
     flex-direction: column;
@@ -139,14 +158,14 @@ section.numbers {
   .vertical-line {
     border-left: 4px solid #e2e8f0;
     height: 60px;
+    @include screen-sm {
+      display: none;
+    }
   }
 }
 
 //nav tabs
 ul.nav-tabs {
-  @include screen-sm {
-    display: none;
-  }
   justify-content: center;
   border: 0;
   margin-bottom: 20px;
@@ -163,10 +182,5 @@ ul.nav-tabs {
         background-color: $blue-primary;
       }
     }
-  }
-}
-.tab-content {
-  div.nav-cards {
-    @include flex(row, 20px);
   }
 }

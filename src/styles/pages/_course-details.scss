@@ -1,0 +1,88 @@
+@use "../abstracts" as *;
+@use "../base" as *;
+
+section.course-details {
+  .details-container {
+    padding: 40px;
+
+    .content {
+      @include flex(row, 7%);
+      .text {
+        @include flex(column, 16px);
+        background-color: #f8fafc;
+        padding: 20px;
+        height: fit-content;
+        .title {
+          @include font($font-inter, 2.2rem, "", 700);
+        }
+        .desc {
+          @include font($font-inter, 0.889rem, #334155, 400);
+        }
+        .details {
+          @include flex(row, 10px);
+          @include font($font-inter, 0.778rem, #334155, 400);
+          align-items: center;
+          .line {
+            font-size: 15px;
+          }
+          .fa-star {
+            color: $gold;
+          }
+        }
+        .created-by {
+          @include flex(row, 10px);
+        }
+        .lang {
+          @include flex(row, 10px);
+        }
+      }
+      .myCard {
+        -o-border-radius: 8px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        -ms-border-radius: 8px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.105),
+          0 3px 10px 0 rgba(0, 0, 0, 0.062);
+        border: #e2e8f0 2px solid;
+        .details {
+          padding: 24px 22px;
+          @include flex(column, 20px);
+          img {
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            -ms-border-radius: 8px;
+            -o-border-radius: 8px;
+            border-radius: 8px;
+          }
+          .price {
+            @include flex(row, 10px);
+            align-items: center;
+            .new {
+              @include font($font-inter, 1.3rem, "", 600);
+            }
+            .old {
+              @include font($font-inter, 1rem, rgb(188, 188, 188), 600);
+              text-decoration: line-through;
+            }
+            .discount {
+              @include font($font-inter, 1.11rem, #16a34a, 600);
+            }
+          }
+          .add-to-cart-btn {
+            @extend .blue-button;
+          }
+          .buy-now-btn {
+            @include button(white, "", 13px, 8px);
+            @include font($font-inter, 0.778rem, $blue-primary, 500);
+            border: $blue-primary 2px solid;
+            width: 100%;
+          }
+        }
+        .share {
+          padding: 24px 22px;
+        }
+      }
+    }
+  }
+}
