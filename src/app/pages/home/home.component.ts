@@ -24,10 +24,13 @@ export class HomeComponent implements OnInit {
   isMobile: boolean = false;
 
 
-  constructor() {
-    this.deviceService.isMobileDevice()
-    window.addEventListener('resize', () => this.deviceService.isMobileDevice());
-  }
+  // constructor() {
+  //   if(isPlatformBrowser(this.platformID)){
+  //     this.deviceService.isMobileDevice()
+  //   window.addEventListener('resize', () => this.deviceService.isMobileDevice());
+  //   }
+
+  // }
 
   // checkDevice() {
   //   this.isMobile = window.innerWidth <= 599; // breakpoint for mobile
@@ -48,6 +51,14 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if (this.isBrowser) {
+      this.deviceService.isMobileDevice();
+
+      // Handle resize safely
+      window.addEventListener('resize', () => this.deviceService.isMobileDevice());
+    }
+
+
     this.galleryService.getSliderImages().subscribe({
       next: (res) => {
         this.sliderImages = res.Slider;
@@ -65,7 +76,7 @@ export class HomeComponent implements OnInit {
         console.log(err);
       }
     })
-    this.isMobileDevice()
+    // this.deviceService.isMobileDevice();
   }
 
   customOptions: OwlOptions = {
@@ -106,19 +117,19 @@ export class HomeComponent implements OnInit {
       .slice(0, 4);
   }
 
-  isMobileDevice(): boolean {
-    if (typeof window === 'undefined' || typeof navigator === 'undefined') {
-      return false; // in case of SSR (Angular Universal, Next.js, etc.)
-    }
+  // isMobileDevice(): boolean {
+  //   if (typeof window === 'undefined' || typeof navigator === 'undefined') {
+  //     return false; // in case of SSR (Angular Universal, Next.js, etc.)
+  //   }
 
-    // Check User Agent for mobile devices
-    const ua = navigator.userAgent || navigator.vendor || (window as any).opera;
+  //   // Check User Agent for mobile devices
+  //   const ua = navigator.userAgent || (window as any).opera;
 
-    if (/android/i.test(ua)) return true;
-    if (/iPhone|iPad|iPod/i.test(ua)) return true;
+  //   if (/android/i.test(ua)) return true;
+  //   if (/iPhone|iPad|iPod/i.test(ua)) return true;
 
-    // Fallback: check screen width (you can adjust breakpoint)
-    return window.innerWidth <= 768;
-  }
+  //   // Fallback: check screen width (you can adjust breakpoint)
+  //   return window.innerWidth <= 768;
+  // }
 
 }

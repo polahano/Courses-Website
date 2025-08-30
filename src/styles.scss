@@ -2,5 +2,5 @@
 @use "bootstrap/scss/bootstrap" as *;
 @use "styles/main" as *;
 
-@import "ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
-@import "ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+@use "ngx-owl-carousel-o/lib/styles/scss/owl.carousel" as *;
+@use "ngx-owl-carousel-o/lib/styles/scss/owl.theme.default" as *;
