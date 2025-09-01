@@ -1,0 +1,14 @@
+@use "../../../styles/abstracts" as *;
+@use "../../../styles/base" as *;
+
+section.not-found {
+  padding: 16px;
+  .image {
+    width: 40%;
+  }
+  .home-btn {
+    @extend .blue-button;
+    width: 20%;
+    padding: 10px 15px;
+  }
+}
