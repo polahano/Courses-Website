@@ -5,7 +5,7 @@
     <p class="discount">-${{ course()?.discount }}</p>
     }
   </div>
-  <div class="details">
+  <div class="card-details">
     <h3 class="course-name">{{ course()?.title }}</h3>
     <p class="instructor">By {{ course()?.author }}</p>
     <div class="rating">
@@ -26,8 +26,9 @@
     <p class="remove">Remove</p>
     } @else {
     <p class="remove">Remove</p>
-    <p class="price">${{ course()?.price }}</p>
-
     }
   </div>
+  @if(!deviceService.isMobileDevice()){
+  <p class="price">${{ course()?.price }}</p>
+  }
 </div>

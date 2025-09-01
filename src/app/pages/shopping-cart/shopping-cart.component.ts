@@ -5,7 +5,7 @@ import { CartCardComponent } from "../../shared/components/cart-card/cart-card.c
 import { ICourse } from '../../shared/interfaces/icourse';
 import { ButtonModule } from 'primeng/button';
 import { OrderPriceComponent } from "../../shared/components/order-price/order-price.component";
-import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map, startWith } from 'rxjs';
 
@@ -13,7 +13,7 @@ import { filter, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-cart',
-  imports: [BreadcrumbComponent, CartCardComponent, ButtonModule, OrderPriceComponent, RouterOutlet],
+  imports: [BreadcrumbComponent, CartCardComponent, ButtonModule, OrderPriceComponent, RouterOutlet, RouterLink],
   templateUrl: './shopping-cart.component.html',
   styleUrl: './shopping-cart.component.scss'
 })

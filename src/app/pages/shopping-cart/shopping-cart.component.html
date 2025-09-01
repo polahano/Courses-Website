@@ -1,7 +1,7 @@
 <section class="shopping-cart">
+  @if(isCheckout()==false){
   <div class="content">
     <div class="text">
-      @if(isCheckout()==false){
       <div class="cart">
         <app-breadcrumb></app-breadcrumb>
         <h2>Shopping Cart</h2>
@@ -12,15 +12,16 @@
           }
         </div>
       </div>
-      }@else {
-      <router-outlet></router-outlet>
-      }
     </div>
-
-    <app-order-price
-      [totalDiscount]="cousesService.totalDiscount()"
-      [totalPrice]="cousesService.totalPrice()"
-      [isCheckout]="isCheckout()"
-    ></app-order-price>
+    <div class="details">
+      <app-order-price
+        [totalDiscount]="cousesService.totalDiscount()"
+        [totalPrice]="cousesService.totalPrice()"
+      ></app-order-price>
+      <button class="proceed" routerLink="checkout">Proceed to Checkout</button>
+    </div>
   </div>
+  }@else {
+  <router-outlet></router-outlet>
+  }
 </section>

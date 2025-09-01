@@ -40,7 +40,7 @@ div.card {
       padding: 5px 10px;
     }
   }
-  .details {
+  .card-details {
     @include flex(column, 10px);
     .course-name {
       cursor: pointer;

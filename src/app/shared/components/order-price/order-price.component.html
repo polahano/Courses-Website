@@ -19,17 +19,4 @@
       <p class="value">${{ totalPrice() + tax }}</p>
     </div>
   </div>
-  @if(isCheckout()){
-  <button
-    class="proceed"
-    routerLink="/order-complete"
-    (click)="changeCheckoutState()"
-  >
-    Proceed to Checkout
-  </button>
-  }@else {
-  <button class="proceed" routerLink="checkout" (click)="changeCheckoutState()">
-    Proceed to Checkout
-  </button>
-  }
 </div>

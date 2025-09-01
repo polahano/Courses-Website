@@ -16,6 +16,8 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputMaskModule } from 'primeng/inputmask';
+import { OrderPriceComponent } from "../../shared/components/order-price/order-price.component";
+import { CoursesService } from '../../core/services/courses/courses.service';
 
 
 
@@ -27,17 +29,19 @@ interface AutoCompleteCompleteEvent {
 
 @Component({
   selector: 'app-checkout',
-  imports: [BreadcrumbComponent, AutoCompleteModule, InputMaskModule, AutoComplete, FormsModule, InputNumberModule, ReactiveFormsModule, PasswordModule, DatePickerModule, RadioButtonModule],
+  imports: [BreadcrumbComponent, AutoCompleteModule, InputMaskModule, AutoComplete, FormsModule, InputNumberModule, ReactiveFormsModule, PasswordModule, DatePickerModule, RadioButtonModule, OrderPriceComponent],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss'
 })
 export class CheckoutComponent implements OnInit {
 
 
-
+  isFormValidated: boolean = false
 
 
   private readonly countryService = inject(CountriesService)
+  readonly cousesService = inject(CoursesService);
+
 
   countryList: ICountry[] = [];
   statesList: IState[] = [];
@@ -78,14 +82,12 @@ export class CheckoutComponent implements OnInit {
       }
     })
     this.checkoutForm.get('state')?.disable();
-
   }
 
   searchCountries(event: AutoCompleteCompleteEvent) {
     this.checkoutForm.get('state')?.disable();
     this.checkoutForm.patchValue({ state: null });
     this.filteredCountries.set(this.countryNames().filter(item => item.toLowerCase().includes(event.query.toLowerCase())));
-    console.log(this.checkoutForm.get('country')?.errors, event.query.toLowerCase());
     if (this.checkoutForm.get('country')?.errors === null) {
       this.checkoutForm.get('state')?.enable();
       this.getAllStates();
@@ -123,7 +125,6 @@ export class CheckoutComponent implements OnInit {
       next: (res) => {
         this.statesList = res.states
         this.statesNames.set(this.statesList.map((item: IState) => item.name));
-        console.log(this.statesNames());
       }, error: (err) => {
         console.log(err);
       }
@@ -134,7 +135,7 @@ export class CheckoutComponent implements OnInit {
 
   onSubmit() {
     this.formSubmitted = true;
-    if (this.checkoutForm?.valid) {
+    if (this.checkoutForm?.valid && this.checkoutForm.errors !== null) {
       this.checkoutForm.reset();
       this.formSubmitted = false;
     }
