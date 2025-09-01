@@ -20,6 +20,10 @@ div.card {
     img {
       aspect-ratio: 16/9;
       height: 150px;
+      @include screen-md {
+        height: 70px;
+        aspect-ratio: 16/9;
+      }
       @include screen-sm {
         width: 100%;
         aspect-ratio: 16/9;
@@ -51,10 +55,16 @@ div.card {
     }
     .rating {
       @include flex(row, 10px);
+      @include screen-md {
+        @include flex(row, 2px);
+      }
       @include font($font-inter, 0.75rem, #334155, 600);
       .fa-star {
         color: $gold;
         font-size: 1rem;
+        @include screen-md {
+          font-size: 0.5rem;
+        }
       }
     }
     .info {
