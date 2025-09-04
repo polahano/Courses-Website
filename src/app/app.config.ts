@@ -10,6 +10,7 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations'
 import { loadingInterceptor } from './core/interceptors/loading.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
@@ -26,6 +27,8 @@ export const appConfig: ApplicationConfig = {
       }
     }
   }),
-  importProvidersFrom([NgxSpinnerModule, BrowserAnimationsModule])
+  importProvidersFrom([NgxSpinnerModule, BrowserAnimationsModule]),
+    ConfirmationService,
+    MessageService
   ]
 };

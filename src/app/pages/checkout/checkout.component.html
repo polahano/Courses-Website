@@ -6,7 +6,7 @@
         <app-breadcrumb></app-breadcrumb>
       </div>
       <div class="checkout-form">
-        <form (ngSubmit)="onSubmit()" [formGroup]="checkoutForm" class="">
+        <form (ngSubmit)="onSubmit($event)" [formGroup]="checkoutForm" class="">
           <div class="left">
             <div class="row">
               <div
@@ -18,6 +18,7 @@
                 <p-autocomplete
                   formControlName="country"
                   inputId="country"
+                  (onFocus)="checkoutForm.get('country')?.markAsDirty()"
                   [suggestions]="filteredCountries()"
                   (completeMethod)="searchCountries($event)"
                   (onSelect)="onCountrySelected($event)"
@@ -26,18 +27,20 @@
                   [style]="{ width: '100%' }"
                   [styleClass]="'w-100 align-self-stretch'"
                   [inputStyle]="{ width: '100%' }"
+                  (OnFocus)="checkoutForm.get('state')?.disable()"
                   required
                   fluid
                 />
               </div>
               <div class="state-input col-12 col-md-6 d-flex flex-column">
-                <label for="country"
+                <label for="state"
                   >State <span class="text-danger">*</span></label
                 >
                 <p-autocomplete
                   formControlName="state"
                   [suggestions]="filteredStates()"
                   (completeMethod)="searchStates($event)"
+                  (onFocus)="checkoutForm.get('country')?.markAsDirty()"
                   placeholder="Enter State"
                   required
                   [forceSelection]="true"
@@ -51,7 +54,13 @@
             <div class="payment-details">
               <div class="d-flex justify-content-between">
                 <div class="d-flex gap-2">
-                  <input type="radio" value="Credit/Debit Card" checked />
+                  <label for="credit-debit"></label>
+                  <input
+                    type="radio"
+                    value="Credit/Debit Card"
+                    checked
+                    aria-label="credit-debit"
+                  />
                   <p class="credit-debit">Credit/Debit Card</p>
                 </div>
                 <img src="/images/visa.png" alt="Visa Master Card" />
@@ -62,27 +71,37 @@
                 >
                 <input
                   pInputText
+                  formControlName="cardName"
                   type="text"
                   id="cardName"
                   name="cardName"
-                  formControlName="cardName"
-                  (invalid)="isInvalid('cardNumber')"
                   placeholder="Enter Your Name"
                   [style]="{ width: '100%' }"
                   required
+                  (onFocus)="checkoutForm.get('cardName')?.markAsTouched()"
                 />
+                @if(checkoutForm.get('cardName')?.invalid &&
+                checkoutForm.get('cardName')?.touched){
+                <div class="text-danger">
+                  Name must be 3 or 4 words (letters only).
+                </div>
+                }
               </div>
               <div class="d-flex flex-column mt-1">
                 <label for="number"
                   >Card Number <span class="text-danger">*</span></label
                 >
-                <p-inputMask
+                <input
+                  pInputText
                   formControlName="cardNumber"
-                  mask="9999 9999 9999 9999"
-                  [slotChar]="''"
+                  maxlength="19"
+                  minlength="19"
                   placeholder="Enter Your Card Number"
                   [style]="{ width: '100%' }"
-                  [styleClass]="'w-100 align-self-stretch'"
+                  (input)="onCardInput($event)"
+                  inputmode="numeric"
+                  autocomplete="cc-number"
+                  fluid
                   required
                 />
               </div>
@@ -101,22 +120,22 @@
                     [inputStyle]="{ width: '100%' }"
                     required
                     [minDate]="currentMonthDate"
+                    (onFocus)="checkoutForm.get('expiryDate')?.markAsDirty()"
                   />
                 </div>
                 <div class="col-12 col-md-6 d-flex flex-column">
                   <label for="cvv"
                     >CVV <span class="text-danger">*</span></label
                   >
-                  <p-password
+                  <input
+                    pInputText
+                    id="cvv"
                     formControlName="cvv"
                     feedback="false"
                     required
                     maxLength="3"
-                    (invalid)="isInvalid('cvv')"
-                    [style]="{ width: '100%' }"
-                    [styleClass]="'w-100 align-self-stretch'"
-                    [inputStyle]="{ width: '100%' }"
-                    [feedback]="false"
+                    (onFocus)="checkoutForm.get('cvv')?.markAsDirty()"
+                    [style]="{ width: '100%', '-webkit-text-security': 'disc' }"
                     autocomplete="off"
                     fluid
                   />
@@ -132,7 +151,19 @@
         [totalDiscount]="cousesService.totalDiscount()"
         [totalPrice]="cousesService.totalPrice()"
       ></app-order-price>
-      <button class="proceed" type="submit">Pay Now</button>
+
+      <div class="flex justify-center gap-2">
+        <p-toast />
+        <p-confirmdialog />
+        <button
+          pButton
+          class="proceed"
+          type="submit"
+          (click)="onSubmit($event)"
+        >
+          Pay Now
+        </button>
+      </div>
     </div>
   </div>
 </section>

@@ -1,8 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { BreadcrumbComponent } from "../../shared/components/breadcrumb/breadcrumb.component";
-import { AutoCompleteModule, AutoCompleteSelectEvent } from 'primeng/autocomplete';
+import { AutoCompleteModule, AutoCompleteSelectEvent, AutoComplete } from 'primeng/autocomplete';
 import { FormControl, FormsModule } from '@angular/forms';
-import { AutoComplete } from 'primeng/autocomplete';
 import { FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CountriesService } from '../../core/services/countries/countries.service';
 import { ICountry, IState } from '../../shared/interfaces/icountry';
@@ -15,6 +14,11 @@ import { OrderPriceComponent } from "../../shared/components/order-price/order-p
 import { CoursesService } from '../../core/services/courses/courses.service';
 import { InputTextModule } from 'primeng/inputtext';
 import { Router } from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmDialog } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { formatDate } from '@angular/common';
 
 
 interface AutoCompleteCompleteEvent {
@@ -36,15 +40,15 @@ interface AutoCompleteCompleteEvent {
     PasswordModule,
     DatePickerModule,
     RadioButtonModule,
-    OrderPriceComponent],
+    OrderPriceComponent, ConfirmDialog, ToastModule, ButtonModule],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss'
 })
 export class CheckoutComponent implements OnInit {
 
+  constructor(private confirmationService: ConfirmationService, private messageService: MessageService) { }
 
   isFormValidated: boolean = false
-  cardNameValue: string | undefined
 
 
   private readonly countryService = inject(CountriesService)
@@ -72,8 +76,8 @@ export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup = new FormGroup({
     country: new FormControl(null, [Validators.required]),
     state: new FormControl(null, [Validators.required]),
-    cardName: new FormControl(null, [Validators.required]),
-    cardNumber: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{16}$/)]),
+    cardName: new FormControl(null, [Validators.required, Validators.pattern(/^[A-Za-z]+( [A-Za-z]+){1,3}$/)]),
+    cardNumber: new FormControl(null, [Validators.required]),
     expiryDate: new FormControl(null, [Validators.required]),
     cvv: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{3}$/)]),
   }
@@ -95,16 +99,16 @@ export class CheckoutComponent implements OnInit {
     this.checkoutForm.get('state')?.disable();
     this.checkoutForm.patchValue({ state: null });
     this.filteredCountries.set(this.countryNames().filter(item => item.toLowerCase().includes(event.query.toLowerCase())));
-    if (this.checkoutForm.get('country')?.errors === null) {
+    console.log(this.countryNames().includes(event.query));
+    if (this.countryNames().includes(event.query.charAt(0).toUpperCase() + event.query.slice(1))) {
       this.checkoutForm.get('state')?.enable();
-      this.getAllStates();
     } else {
       this.checkoutForm.get('state')?.disable();
     }
   }
 
-  onCountrySelected($event: AutoCompleteSelectEvent) {
-    if (this.checkoutForm.get('country')?.errors === null) {
+  onCountrySelected(event: AutoCompleteSelectEvent) {
+    if (this.countryNames().includes(event.value)) {
       this.checkoutForm.get('state')?.enable();
       this.getAllStates();
     } else {
@@ -134,19 +138,87 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
+  onSubmit(event: MouseEvent) {
+    console.log(this.checkoutForm);
 
-  onSubmit() {
-    console.log(this.checkoutForm.errors);
-    if (this.checkoutForm.valid) {
-      this.router.navigate(['/order-complete'])
-    } else {
-      this.checkoutForm.markAllAsTouched();
+
+    if (!this.countryNames().includes(this.checkoutForm.get('country')?.value)) {
+      this.checkoutForm.get('country')?.markAsDirty();
+
     }
+
+    if (!this.statesNames().includes(this.checkoutForm.get('state')?.value)) {
+      this.checkoutForm.get('state')?.markAsDirty();
+    }
+
+    if (!this.checkoutForm.get('cardName')?.valid) {
+      this.checkoutForm.get('cardName')?.markAsDirty();
+    }
+    if (!this.checkoutForm.get('cardNumber')?.valid) {
+      this.checkoutForm.get('cardNumber')?.markAsDirty();
+    }
+    if (!this.checkoutForm.get('expiryDate')?.valid) {
+      this.checkoutForm.get('expiryDate')?.markAsDirty();
+    }
+    if (!this.checkoutForm.get('cvv')?.valid) {
+      this.checkoutForm.get('cvv')?.markAsDirty();
+    }
+
+    if (this.checkoutForm.valid) {
+      this.confirmInputs(event);
+    }
+  }
+
+  confirmInputs(event: Event) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: `Are you sure that you want to proceed with these information?<br><br>
+                Country: ${this.checkoutForm.get('country')?.value}<br>
+                State: ${this.checkoutForm.get('state')?.value}<br><br>
+                Card Details:<br>
+                Card Name: ${this.checkoutForm.get('cardName')?.value}<br>
+                Card Number: ${this.checkoutForm.get('cardNumber')?.value}<br>
+                Expiry Date: ${formatDate(this.checkoutForm.get('expiryDate')?.value, 'MMM yyyy', 'en-US')}`
+      ,
+      header: 'Confirmation',
+      closable: true,
+      closeOnEscape: true,
+      icon: 'pi pi-exclamation-triangle',
+      rejectButtonProps: {
+        label: 'Cancel',
+        severity: 'secondary',
+        outlined: true,
+      },
+      acceptButtonProps: {
+        label: 'Proceed',
+      },
+      accept: () => {
+        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+        setTimeout(() => {
+          this.router.navigate(['/order-complete'])
+        }, 1000);
+      },
+      reject: () => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Rejected',
+          detail: 'You have rejected',
+          life: 3000,
+        });
+      },
+    });
   }
 
   isInvalid(controlName: string) {
     const control = this.checkoutForm.get(controlName);
-    return control?.invalid && (control.touched || this.isFormValidated);
+    return control?.invalid && control.touched;
+  }
+
+  onCardInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const digits = input.value.replace(/\D/g, '').slice(0, 16);
+    const formatted = digits.replace(/(.{4})/g, '$1 ').trim();
+    this.checkoutForm.get('cardNumber')!.setValue(formatted, { emitEvent: false });
   }
 
 }

@@ -21,9 +21,9 @@ export const routes: Routes = [
                 // data: { breadcrumb: 'Course' }
             },
             {
-                path: 'categories', data: { breadcrumb: 'Categories' }, children: [
+                path: '', data: { breadcrumb: 'Categories' }, children: [
                     {
-                        path: 'details', data: { breadcrumb: 'Details' }, children: [
+                        path: '', data: { breadcrumb: 'Details' }, children: [
                             {
                                 path: 'shopping-cart', component: ShoppingCartComponent, data: { breadcrumb: 'Shopping Cart' }, children: [
                                     { path: 'checkout', component: CheckoutComponent, data: { breadcrumb: 'Checkout' } },
