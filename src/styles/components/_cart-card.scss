@@ -18,16 +18,17 @@ div.card {
   .image {
     position: relative;
     img {
-      aspect-ratio: 16/9;
-      height: 150px;
-      @include screen-md {
-        height: 70px;
+      @include screen-lg {
         aspect-ratio: 16/9;
+        height: 150px;
       }
       @include screen-sm {
         width: 100%;
         aspect-ratio: 16/9;
       }
+
+      height: 70px;
+      aspect-ratio: 16/9;
       object-fit: cover;
       -webkit-border-radius: 8px;
       -moz-border-radius: 8px;

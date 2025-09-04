@@ -10,6 +10,7 @@
   position: relative;
 
   .nav-logo {
+    cursor: pointer;
     height: 36px;
     @include screen-md {
       height: 46px;

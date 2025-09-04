@@ -22,11 +22,12 @@
                   (completeMethod)="searchCountries($event)"
                   (onSelect)="onCountrySelected($event)"
                   placeholder="Enter Country"
-                  required
                   [forceSelection]="true"
                   [style]="{ width: '100%' }"
                   [styleClass]="'w-100 align-self-stretch'"
                   [inputStyle]="{ width: '100%' }"
+                  required
+                  fluid
                 />
               </div>
               <div class="state-input col-12 col-md-6 d-flex flex-column">
@@ -56,16 +57,19 @@
                 <img src="/images/visa.png" alt="Visa Master Card" />
               </div>
               <div class="d-flex flex-column mt-1">
-                <label for="name"
+                <label for="cardName"
                   >Name of Card <span class="text-danger">*</span></label
                 >
-                <p-autocomplete
+                <input
+                  pInputText
+                  type="text"
+                  id="cardName"
+                  name="cardName"
                   formControlName="cardName"
-                  required
+                  (invalid)="isInvalid('cardNumber')"
                   placeholder="Enter Your Name"
                   [style]="{ width: '100%' }"
-                  [styleClass]="'w-100 align-self-stretch'"
-                  [inputStyle]="{ width: '100%' }"
+                  required
                 />
               </div>
               <div class="d-flex flex-column mt-1">
@@ -75,7 +79,6 @@
                 <p-inputMask
                   formControlName="cardNumber"
                   mask="9999 9999 9999 9999"
-                  [autoClear]="false"
                   [slotChar]="''"
                   placeholder="Enter Your Card Number"
                   [style]="{ width: '100%' }"
@@ -109,9 +112,13 @@
                     feedback="false"
                     required
                     maxLength="3"
+                    (invalid)="isInvalid('cvv')"
                     [style]="{ width: '100%' }"
                     [styleClass]="'w-100 align-self-stretch'"
                     [inputStyle]="{ width: '100%' }"
+                    [feedback]="false"
+                    autocomplete="off"
+                    fluid
                   />
                 </div>
               </div>

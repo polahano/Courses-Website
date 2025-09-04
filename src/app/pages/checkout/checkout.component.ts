@@ -3,14 +3,9 @@ import { BreadcrumbComponent } from "../../shared/components/breadcrumb/breadcru
 import { AutoCompleteModule, AutoCompleteSelectEvent } from 'primeng/autocomplete';
 import { FormControl, FormsModule } from '@angular/forms';
 import { AutoComplete } from 'primeng/autocomplete';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { MessageModule, Message } from 'primeng/message';
-import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
+import { FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CountriesService } from '../../core/services/countries/countries.service';
 import { ICountry, IState } from '../../shared/interfaces/icountry';
-import { ICourse } from '../../shared/interfaces/icourse';
 import { PasswordModule } from 'primeng/password';
 import { DatePickerModule } from 'primeng/datepicker';
 import { RadioButtonModule } from 'primeng/radiobutton';
@@ -18,8 +13,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputMaskModule } from 'primeng/inputmask';
 import { OrderPriceComponent } from "../../shared/components/order-price/order-price.component";
 import { CoursesService } from '../../core/services/courses/courses.service';
-
-
+import { InputTextModule } from 'primeng/inputtext';
+import { Router } from '@angular/router';
 
 
 interface AutoCompleteCompleteEvent {
@@ -29,7 +24,19 @@ interface AutoCompleteCompleteEvent {
 
 @Component({
   selector: 'app-checkout',
-  imports: [BreadcrumbComponent, AutoCompleteModule, InputMaskModule, AutoComplete, FormsModule, InputNumberModule, ReactiveFormsModule, PasswordModule, DatePickerModule, RadioButtonModule, OrderPriceComponent],
+  imports: [
+    BreadcrumbComponent,
+    InputTextModule,
+    AutoCompleteModule,
+    InputMaskModule,
+    AutoComplete,
+    FormsModule,
+    InputNumberModule,
+    ReactiveFormsModule,
+    PasswordModule,
+    DatePickerModule,
+    RadioButtonModule,
+    OrderPriceComponent],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss'
 })
@@ -37,10 +44,12 @@ export class CheckoutComponent implements OnInit {
 
 
   isFormValidated: boolean = false
+  cardNameValue: string | undefined
 
 
   private readonly countryService = inject(CountriesService)
   readonly cousesService = inject(CoursesService);
+  private readonly router = inject(Router);
 
 
   countryList: ICountry[] = [];
@@ -57,7 +66,6 @@ export class CheckoutComponent implements OnInit {
 
   readonly currentMonthDate = new Date(this.year, this.month, 1);
 
-  formSubmitted: boolean = false;
   date: Date | undefined;
 
 
@@ -72,7 +80,6 @@ export class CheckoutComponent implements OnInit {
   );
 
   ngOnInit(): void {
-
     this.countryService.getAllCountries().subscribe({
       next: (res) => {
         this.countryList = res.countries
@@ -107,15 +114,11 @@ export class CheckoutComponent implements OnInit {
   }
 
 
-
-
   searchStates(event: AutoCompleteCompleteEvent) {
     if (this.checkoutForm.get('country')?.value !== null) {
-
       this.filteredStates.set(this.statesNames().filter(item => item.toLowerCase().includes(event.query.toLowerCase())));
     }
   }
-
 
 
   getAllStates() {
@@ -132,18 +135,18 @@ export class CheckoutComponent implements OnInit {
   }
 
 
-
   onSubmit() {
-    this.formSubmitted = true;
-    if (this.checkoutForm?.valid && this.checkoutForm.errors !== null) {
-      this.checkoutForm.reset();
-      this.formSubmitted = false;
+    console.log(this.checkoutForm.errors);
+    if (this.checkoutForm.valid) {
+      this.router.navigate(['/order-complete'])
+    } else {
+      this.checkoutForm.markAllAsTouched();
     }
   }
 
   isInvalid(controlName: string) {
-    const control = this.checkoutForm?.get(controlName);
-    return control?.invalid && (control.touched || this.formSubmitted);
+    const control = this.checkoutForm.get(controlName);
+    return control?.invalid && (control.touched || this.isFormValidated);
   }
 
 }

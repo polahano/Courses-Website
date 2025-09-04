@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -6,8 +6,10 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
-import { provideHttpClient, withFetch } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations'
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations'
+import { loadingInterceptor } from './core/interceptors/loading.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
@@ -15,7 +17,7 @@ export const appConfig: ApplicationConfig = {
   provideRouter(routes),
   provideClientHydration(withEventReplay()),
   provideAnimationsAsync(),
-  provideHttpClient(withFetch()),
+  provideHttpClient(withFetch(), withInterceptors([loadingInterceptor])),
   providePrimeNG({
     theme: {
       preset: Aura,
@@ -23,5 +25,7 @@ export const appConfig: ApplicationConfig = {
         darkModeSelector: false
       }
     }
-  })]
+  }),
+  importProvidersFrom([NgxSpinnerModule, BrowserAnimationsModule])
+  ]
 };
