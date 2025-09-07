@@ -193,7 +193,7 @@ export class CheckoutComponent implements OnInit {
         label: 'Proceed',
       },
       accept: () => {
-        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+        this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Payment done successfully' });
         setTimeout(() => {
           this.router.navigate(['/order-complete'])
         }, 1000);
@@ -202,7 +202,7 @@ export class CheckoutComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Rejected',
-          detail: 'You have rejected',
+          detail: 'Payment declined',
           life: 3000,
         });
       },
