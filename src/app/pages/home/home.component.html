@@ -63,7 +63,7 @@
 
 <section>
   <div class="gallery">
-    <div>
+    <div class="gallery-text">
       <p class="title">
         <span class="light-blue-text">Check</span> our latest Media Gallery
       </p>
@@ -78,7 +78,7 @@
         View All Photos
       </button>
     </div>
-
+    @if(deviceService.isMobileDevice()){
     <div class="carousel scroll-x">
       @for(img of sliderImages; track img.id){
       <img
@@ -88,6 +88,18 @@
       />
       }
     </div>
+    } @else{
+    <div class="owl-cont">
+      <owl-carousel-o [options]="customOptions">
+        @for (image of sliderImages; track image.id) {
+        <ng-template carouselSlide [id]="image.id.toString()">
+          <img [src]="image.image" alt="gallery image" />
+        </ng-template>
+        }
+      </owl-carousel-o>
+    </div>
+    }
+
     <button type="button" class="view-photos-button" title="View All Photos">
       View All Photos
     </button>
@@ -185,11 +197,3 @@
     }
   </div>
 </section>
-
-<!-- <owl-carousel-o [options]="customOptions">
-  @for (image of sliderImages; track image.id) {
-  <ng-template carouselSlide [id]="image.id.toString()">
-    <img [src]="image.image" alt="gallery image" />
-  </ng-template>
-  }
-</owl-carousel-o> -->

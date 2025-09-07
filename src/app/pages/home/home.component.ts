@@ -76,29 +76,27 @@ export class HomeComponent implements OnInit {
         console.log(err);
       }
     })
-    // this.deviceService.isMobileDevice();
   }
 
   customOptions: OwlOptions = {
     loop: true,
-    mouseDrag: false,
-    touchDrag: false,
+    mouseDrag: true,
+    touchDrag: true,
     pullDrag: false,
+    freeDrag: true,
     dots: false,
     navSpeed: 700,
     center: true,
-    navText: ['', ''],
+    autoWidth: true,
+    navText: ['<', '>'],
     responsive: {
       0: {
-        items: 1
-      },
-      400: {
-        items: 2
-      },
-      740: {
         items: 3
       },
-      940: {
+      600: {
+        items: 3
+      },
+      1200: {
         items: 4
       }
     },
@@ -116,20 +114,5 @@ export class HomeComponent implements OnInit {
       // .filter(c => c.showOnHomepage === true) 
       .slice(0, 4);
   }
-
-  // isMobileDevice(): boolean {
-  //   if (typeof window === 'undefined' || typeof navigator === 'undefined') {
-  //     return false; // in case of SSR (Angular Universal, Next.js, etc.)
-  //   }
-
-  //   // Check User Agent for mobile devices
-  //   const ua = navigator.userAgent || (window as any).opera;
-
-  //   if (/android/i.test(ua)) return true;
-  //   if (/iPhone|iPad|iPod/i.test(ua)) return true;
-
-  //   // Fallback: check screen width (you can adjust breakpoint)
-  //   return window.innerWidth <= 768;
-  // }
 
 }

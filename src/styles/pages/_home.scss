@@ -5,7 +5,9 @@
     display: none;
   }
   .hero-text {
-    @include flex(column, 20px);
+    div {
+      @include flex(column, 20px);
+    }
     padding: 32px;
 
     @include screen-md {
@@ -22,7 +24,6 @@
     .desc {
       @include font($font-poppins, "", $gray-primary, 400);
     }
-    gap: 19px;
     .get-started-button {
       @include button($blue-primary, 28px, 8px, 8px);
       @include font($font-inter, 0.857rem, white, 600);
@@ -43,27 +44,38 @@
   }
   background-color: $bg-light-blue;
   padding-block: 40.25px;
-  .title {
-    @include font($font-poppins, 1.875rem, $text-dark-blue, 600);
-    padding-inline: 20px;
-    @include screen-md {
-      @include font($font-poppins, 2.5rem, $text-dark-blue, 600);
-    }
-  }
-  .desc {
-    @include font($font-poppins, 1rem, $gray-primary2, 400);
-    margin-bottom: 10px;
-    padding-inline: 20px;
-    @include screen-md {
-      @include font($font-poppins, 1.375rem, $gray-primary2, 400);
-    }
-  }
+  overflow: hidden;
 
   .view-photos-btn {
     @include button($blue-primary, 20px, 10px, 8px);
     @include font($font-inter, 0.857rem, white, 600);
     margin-top: 50px;
     margin-inline: auto;
+  }
+
+  .gallery-text {
+    width: 30%;
+    .title {
+      @include font($font-poppins, 1.875rem, $text-dark-blue, 600);
+      padding-inline: 20px;
+      @include screen-md {
+        @include font($font-poppins, 2.5rem, $text-dark-blue, 600);
+      }
+    }
+    .desc {
+      @include font($font-poppins, 1rem, $gray-primary2, 400);
+      margin-bottom: 10px;
+      padding-inline: 20px;
+      @include screen-md {
+        @include font($font-poppins, 1.375rem, $gray-primary2, 400);
+      }
+    }
+    .view-photos-button-md {
+      @extend .view-photos-btn;
+      @include screen-sm {
+        display: none;
+      }
+    }
   }
 
   .view-photos-button {
@@ -73,13 +85,6 @@
     }
   }
 
-  .view-photos-button-md {
-    @extend .view-photos-btn;
-    // display: none;
-    @include screen-sm {
-      display: none;
-    }
-  }
   .carousel {
     @include flex(row, 20px);
     padding-right: 0 !important ;
@@ -92,6 +97,84 @@
       -ms-border-radius: 20px;
       -o-border-radius: 20px;
       border-radius: 20px;
+    }
+  }
+
+  .owl-cont {
+    width: 70%;
+    owl-carousel-o {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .owl-theme .owl-nav {
+        text-align: start;
+        .owl-btn {
+          height: 20px;
+          width: 30px;
+          text-align: center;
+          padding: 0px;
+        }
+        .owl-prev {
+          @extend .owl-btn;
+          background-color: $blue-primary;
+          -webkit-border-radius: 50% 0px 0px 50%;
+          -moz-border-radius: 50% 0px 0px 50%;
+          -ms-border-radius: 50% 0px 0px 50%;
+          -o-border-radius: 50% 0px 0px 50%;
+          border-radius: 50% 0px 0px 50%;
+        }
+
+        .owl-next {
+          @extend .owl-btn;
+          background-color: #05a1dd;
+          -webkit-transform: translateX(-10px);
+          -moz-transform: translateX(-10px);
+          -ms-transform: translateX(-10px);
+          -o-transform: translateX(-10px);
+          transform: translateX(-10px);
+          border-radius: 0px 50% 50% 0px;
+          -webkit-border-radius: 0px 50% 50% 0px;
+          -moz-border-radius: 0px 50% 50% 0px;
+          -ms-border-radius: 0px 50% 50% 0px;
+          -o-border-radius: 0px 50% 50% 0px;
+        }
+      }
+    }
+    .owl-stage {
+      height: 250px;
+      @include screen-lg {
+        height: 500px;
+      }
+    }
+
+    .owl-item img {
+      border-radius: 16px;
+      -webkit-border-radius: 16px;
+      -moz-border-radius: 16px;
+      -ms-border-radius: 16px;
+      -o-border-radius: 16px;
+      transform: translateY(20%);
+      -webkit-transform: translateY(20%);
+      -moz-transform: translateY(20%);
+      -ms-transform: translateY(20%);
+      -o-transform: translateY(20%);
+      -webkit-filter: brightness(30%);
+      filter: brightness(30%);
+    }
+    .owl-item.center img {
+      width: 130%;
+      transition: all 700ms;
+      -webkit-transition: all 700ms;
+      -moz-transition: all 700ms;
+      -ms-transition: all 700ms;
+      -o-transition: all 700ms;
+      -webkit-transform: translateX(-10%);
+      -moz-transform: translateX(-10%);
+      -ms-transform: translateX(-10%);
+      -o-transform: translateX(-10%);
+      transform: translateX(-10%);
+      -webkit-filter: brightness(100%);
+      filter: brightness(100%);
     }
   }
 }
@@ -109,9 +192,6 @@
   .courses-cards {
     @include flex(row, 20px);
     flex-wrap: wrap;
-    // @include screen-md {
-    //   display: none;
-    // }
   }
   .half-circle {
     position: absolute;
@@ -174,7 +254,10 @@ ul.nav-tabs {
     button.nav-link {
       border: 0;
       color: white;
-      width: 180px;
+      width: 140px;
+      @include screen-lg {
+        width: 180px;
+      }
       border-radius: 8px;
       background-color: #808080;
       &.active {
