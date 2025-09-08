@@ -54,12 +54,16 @@
   }
 
   .gallery-text {
+    padding-left: 16px;
     @include screen-md {
       width: 30%;
+      padding-left: 30px;
+    }
+    @include screen-lg {
+      padding-left: 60px;
     }
     .title {
       @include font($font-poppins, 1.875rem, $text-dark-blue, 600);
-      padding-inline: 20px;
       @include screen-md {
         @include font($font-poppins, 2.5rem, $text-dark-blue, 600);
       }
@@ -67,13 +71,13 @@
     .desc {
       @include font($font-poppins, 1rem, $gray-primary2, 400);
       margin-bottom: 10px;
-      padding-inline: 20px;
       @include screen-md {
         @include font($font-poppins, 1.375rem, $gray-primary2, 400);
       }
     }
     .view-photos-button-md {
       @extend .view-photos-btn;
+      margin-inline: 0;
       @include screen-sm {
         display: none;
       }
