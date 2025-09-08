@@ -55,14 +55,14 @@ div.card {
       @include font($font-inter, 0.875rem, #334155, 400);
     }
     .rating {
-      @include flex(row, 10px);
-      @include screen-md {
-        @include flex(row, 2px);
+      @include flex(row, 2px);
+      @include screen-lg {
+        @include flex(row, 10px);
       }
       @include font($font-inter, 0.75rem, #334155, 600);
       .fa-star {
         color: $gold;
-        font-size: 1rem;
+        font-size: 0.75rem;
         @include screen-md {
           font-size: 0.5rem;
         }

@@ -54,7 +54,9 @@
   }
 
   .gallery-text {
-    width: 30%;
+    @include screen-md {
+      width: 30%;
+    }
     .title {
       @include font($font-poppins, 1.875rem, $text-dark-blue, 600);
       padding-inline: 20px;

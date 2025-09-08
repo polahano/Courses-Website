@@ -16,9 +16,9 @@ section.checkout {
       @include flex(column, 16px);
     }
 
-    padding: 26px 57px;
-    @include screen-sm {
-      padding: 20px;
+    padding: 20px;
+    @include screen-lg {
+      padding: 26px 57px;
     }
     .text {
       flex-basis: 70%;
