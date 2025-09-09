@@ -99,7 +99,6 @@ export class CheckoutComponent implements OnInit {
     this.checkoutForm.get('state')?.disable();
     this.checkoutForm.patchValue({ state: null });
     this.filteredCountries.set(this.countryNames().filter(item => item.toLowerCase().includes(event.query.toLowerCase())));
-    console.log(this.countryNames().includes(event.query));
     if (this.countryNames().includes(event.query.charAt(0).toUpperCase() + event.query.slice(1))) {
       this.checkoutForm.get('state')?.enable();
     } else {
@@ -139,8 +138,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   onSubmit(event: MouseEvent) {
-    console.log(this.checkoutForm);
-
 
     if (!this.countryNames().includes(this.checkoutForm.get('country')?.value)) {
       this.checkoutForm.get('country')?.markAsDirty();

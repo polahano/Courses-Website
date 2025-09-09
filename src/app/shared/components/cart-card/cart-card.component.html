@@ -6,7 +6,9 @@
     }
   </div>
   <div class="card-details">
-    <h3 class="course-name">{{ course()?.title }}</h3>
+    <h3 class="course-name" routerLink="/courses/{{ course()?.title }}">
+      {{ course()?.title }}
+    </h3>
     <p class="instructor">By {{ course()?.author }}</p>
     <div class="rating">
       <div class="stars">

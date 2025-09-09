@@ -63,7 +63,6 @@ export class HomeComponent implements OnInit {
       next: (res) => {
         this.sliderImages = res.Slider;
         this.galleryImages = res.Slider.map((p: { image: any; }) => p.image);
-        console.log(this.galleryImages);
       }, error: (err) => {
         console.log(err);
       }

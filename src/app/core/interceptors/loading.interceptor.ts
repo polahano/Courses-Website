@@ -1,6 +1,6 @@
 import { HttpContextToken, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { finalize } from 'rxjs';
 
 // Optional flag to skip spinner per request
@@ -31,7 +31,7 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
         pending = Math.max(0, pending - 1);
         if (pending === 0) {
           // tiny debounce to avoid flicker between rapid requests
-          hideTimer = setTimeout(() => spinner.hide(), 120);
+          hideTimer = setTimeout(() => spinner.hide(), 160);
         }
       }
     })
