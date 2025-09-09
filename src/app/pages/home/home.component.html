@@ -1,4 +1,5 @@
 <section>
+  @if(deviceService.isMobileDevice()){
   <div class="hero-header">
     <div class="hero-text">
       <div>
@@ -21,8 +22,40 @@
       class="hero-image mobile-content"
     />
   </div>
-  <app-banner></app-banner>
+  } @else {
+  <owl-carousel-o [options]="bannerCustomOptions">
+    @for (banner of banners; track banner.id) {
+    <ng-template carouselSlide [id]="banner.id.toString()">
+      <div class="picsum-img-wrapper">
+        <div class="position-relative">
+          <img [src]="banner.image" alt="Random first slide" class="w-100" />
+          <div class="text">
+            <h1 class="title">
+              Better
+              <span [style.color]="'#' + banner.colorCode">Insights</span> For
+              Business
+              <span [style.color]="'#' + banner.colorCode">Growth</span>
+            </h1>
+            <p class="desc">
+              {{ banner.brief }}
+            </p>
+            <button
+              type="button"
+              class="get-started-button"
+              [style.backgroundColor]="'#' + banner.colorCode"
+              title="Get Started"
+            >
+              Get Started
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    }
+  </owl-carousel-o>
+  }
 </section>
+
 <section class="numbers">
   <div class="numbers-container">
     @if(isBrowser){
@@ -90,7 +123,7 @@
     </div>
     } @else{
     <div class="owl-cont">
-      <owl-carousel-o [options]="customOptions">
+      <owl-carousel-o [options]="galleryCustomOptions">
         @for (image of sliderImages; track image.id) {
         <ng-template carouselSlide [id]="image.id.toString()">
           <img [src]="image.image" alt="gallery image" />

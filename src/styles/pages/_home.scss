@@ -64,15 +64,18 @@
     }
     .title {
       @include font($font-poppins, 1.875rem, $text-dark-blue, 600);
-      @include screen-md {
-        @include font($font-poppins, 2.5rem, $text-dark-blue, 600);
+      @include screen-lg {
+        font-size: 2.5rem;
       }
     }
     .desc {
       @include font($font-poppins, 1rem, $gray-primary2, 400);
       margin-bottom: 10px;
       @include screen-md {
-        @include font($font-poppins, 1.375rem, $gray-primary2, 400);
+        font-size: 1rem;
+      }
+      @include screen-lg {
+        font-size: 1.375rem;
       }
     }
     .view-photos-button-md {
@@ -93,7 +96,7 @@
 
   .carousel {
     @include flex(row, 20px);
-    padding-right: 0 !important ;
+    padding-right: 0;
 
     .gallery-image {
       height: 290px;

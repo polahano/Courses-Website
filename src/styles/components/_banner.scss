@@ -1,29 +1,65 @@
 @use "../abstracts" as *;
 
-ngb-carousel {
-  @include screen-sm {
-    display: none !important;
-  }
-}
-
 .picsum-img-wrapper {
   .text {
     position: absolute;
-    top: 20%;
-    left: 11%;
+    top: 10%;
+    left: 5%;
     width: 35%;
+    @include screen-lg {
+      top: 20%;
+      left: 11%;
+      width: 35%;
+    }
     @include flex(column, 16px);
 
     .title {
-      @include font($font-dmsans, 2.5rem, "", 700);
+      @include font($font-dmsans, 1.9rem, "", 700);
+      @include screen-lg {
+        font-size: 2.5rem;
+      }
     }
 
     .desc {
-      @include font($font-poppins, "", $gray-primary, 400);
+      @include font($font-poppins, 0.9rem, $gray-primary, 400);
+      @include screen-lg {
+        font-size: 1rem;
+      }
     }
     .get-started-button {
       @include button("", 28px, 8px, 8px);
       @include font($font-inter, 0.857rem, white, 600);
     }
   }
+}
+
+.owl-theme .owl-dots {
+  display: flex;
+  width: fit-content;
+  -webkit-transform: translate(18rem, -5rem);
+  -moz-transform: translate(18rem, -5rem);
+  -ms-transform: translate(18rem, -5rem);
+  -o-transform: translate(18rem, -5rem);
+  transform: translate(18rem, -5rem);
+  @include screen-lg {
+    -webkit-transform: translate(8rem, -10rem);
+    -moz-transform: translate(8rem, -10rem);
+    -ms-transform: translate(8rem, -10rem);
+    -o-transform: translate(8rem, -10rem);
+    transform: translate(8rem, -10rem);
+  }
+  @mixin banner-dots($childNo, $bgColor) {
+    .owl-dot:nth-child(#{$childNo}) span {
+      background: $bgColor;
+      width: 1.667rem;
+      height: 1.667rem;
+    }
+    .owl-dot.active:nth-child(#{$childNo}) span {
+      // background-color: darken($bgColor, 10%);
+      background: $bgColor;
+    }
+  }
+  @include banner-dots(1, $blue-primary);
+  @include banner-dots(2, $green-primary);
+  @include banner-dots(3, $orange-primary);
 }
