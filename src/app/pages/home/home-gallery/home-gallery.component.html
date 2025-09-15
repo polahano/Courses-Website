@@ -1,0 +1,44 @@
+<section class="gallery">
+  <div class="gallery">
+    <div class="gallery-text">
+      <p class="title">
+        <span class="light-blue-text">Check</span> our latest Media Gallery
+      </p>
+      <p class="desc">
+        Every picture holds a moment, every moment holds a story
+      </p>
+      <button
+        type="button"
+        class="view-photos-button-md"
+        title="View All Photos"
+      >
+        View All Photos
+      </button>
+    </div>
+    @if(deviceService.isMobileDevice()){
+    <div class="carousel scroll-x">
+      @for(img of sliderImages; track img.id){
+      <img
+        [src]="img.image"
+        alt="gallery image {{ img.id }}"
+        class="gallery-image"
+      />
+      }
+    </div>
+    } @else{
+    <div class="owl-cont">
+      <owl-carousel-o [options]="galleryCustomOptions">
+        @for (image of sliderImages; track image.id) {
+        <ng-template carouselSlide [id]="image.id.toString()">
+          <img [src]="image.image" alt="gallery image" />
+        </ng-template>
+        }
+      </owl-carousel-o>
+    </div>
+    }
+
+    <button type="button" class="view-photos-button" title="View All Photos">
+      View All Photos
+    </button>
+  </div>
+</section>

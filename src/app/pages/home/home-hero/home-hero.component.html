@@ -1,0 +1,57 @@
+<section class="hero">
+  @if(deviceService.isMobileDevice()){
+  <div class="hero-header">
+    <div class="hero-text">
+      <div>
+        <h1 class="title">
+          Better <span class="light-blue-text">Insights</span> For Business
+          <span class="light-blue-text">Growth</span>
+        </h1>
+        <p class="desc">
+          Learn UI-UX Design skills with weekend UX . The latest online learning
+          system and material that help your knowledge growing.
+        </p>
+        <button type="button" class="get-started-button" title="Get Started">
+          Get Started
+        </button>
+      </div>
+    </div>
+    <img
+      src="images/Group 2216.svg"
+      alt="girl home"
+      class="hero-image mobile-content"
+    />
+  </div>
+  } @else {
+  <owl-carousel-o [options]="bannerCustomOptions">
+    @for (banner of banners; track banner.id) {
+    <ng-template carouselSlide [id]="banner.id.toString()">
+      <div class="picsum-img-wrapper">
+        <div class="position-relative">
+          <img [src]="banner.image" alt="Random first slide" class="w-100" />
+          <div class="text">
+            <h1 class="title">
+              Better
+              <span [style.color]="'#' + banner.colorCode">Insights</span> For
+              Business
+              <span [style.color]="'#' + banner.colorCode">Growth</span>
+            </h1>
+            <p class="desc">
+              {{ banner.brief }}
+            </p>
+            <button
+              type="button"
+              class="get-started-button"
+              [style.backgroundColor]="'#' + banner.colorCode"
+              title="Get Started"
+            >
+              Get Started
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    }
+  </owl-carousel-o>
+  }
+</section>
